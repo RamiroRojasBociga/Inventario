@@ -1,7 +1,7 @@
 package com.example.inventario.controller;
 
+import com.example.inventario.model.InventarioProductos;
 import com.example.inventario.model.Producto;
-import com.example.inventario.model.Tienda;
 import com.example.inventario.utils.Persistencia;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,12 +17,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.ResourceBundle;
+import java.util.*;
 
-public class ProductoConntroller implements Initializable {
+public class ProductoController implements Initializable {
 
     private ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
+    private InventarioProductos inventarioProductos;
 
     @FXML
     private Button btnActualizar;
@@ -78,6 +78,7 @@ public class ProductoConntroller implements Initializable {
     @FXML
     private TextField txtPrecio;
 
+    @FXML
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoUnico"));
@@ -85,7 +86,7 @@ public class ProductoConntroller implements Initializable {
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
 
-        cargarProductosDesdeArchivo();
+        cargarProductosDesdeArchivo(); // Aquí se cargan los datos desde el archivo
 
         tableProducto.setItems(listaProductos);
 
@@ -98,10 +99,10 @@ public class ProductoConntroller implements Initializable {
                 txtPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
             }
         });
-    }
 
-    private void cargarProductosDesdeArchivo() {
-        listaProductos.addAll(Persistencia.cargarProductosDesdeArchivo());
+        // Imprimir los datos del archivo de productos al inicializar
+        System.out.println("Datos del archivo de productos al iniciar:");
+        imprimirListaProductosOrdenada();
     }
 
     @FXML
@@ -175,8 +176,12 @@ public class ProductoConntroller implements Initializable {
         Persistencia.guardarProductosEnArchivo(listaProductos);
 
         mostrarMensaje("Producto Creado", "El producto se ha creado con éxito.");
-
         limpiarCampos();
+        // Imprimir la lista de productos ordenada por consola
+        System.out.println("Lista de productos ordenada por cantidad:");
+        for (Producto producto : listaProductos) {
+            System.out.println(producto);
+        }
     }
 
     @FXML
@@ -199,6 +204,20 @@ public class ProductoConntroller implements Initializable {
     @FXML
     void limpiarCampo(ActionEvent event) {
         limpiarCampos();
+    }
+    private void cargarProductosDesdeArchivo() {
+        listaProductos.addAll(Persistencia.cargarProductosDesdeArchivo());
+    }
+
+    // Método para imprimir la lista de productos ordenada por consola
+    private void imprimirListaProductosOrdenada() {
+        List<Producto> productos = Persistencia.cargarProductosDesdeArchivo();
+        Collections.sort(productos, new InventarioProductos.ComparadorProductosPorCantidad());
+
+        System.out.println("Lista de productos ordenada por cantidad:");
+        for (Producto producto : productos) {
+            System.out.println("Producto: " + producto.getNombre() + ", Cantidad en inventario: " + producto.getCantidadInventario());
+        }
     }
 
     private void limpiarCampos() {
