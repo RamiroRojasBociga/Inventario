@@ -1,4 +1,4 @@
-3e,papa,2.0,33
-2w,yuca,400.0,23
-5ty,Arroz,400.0,10
-5yu,leche,600.0,50
+3e,papa,2.0,6
+3rt,Yuca,2000.0,45
+3rtt,Mani,300.0,5
+1qwe,Uvas,5.0,50
