@@ -51,8 +51,10 @@ public class Persistencia {
             }
         }
         guardarProductosEnArchivo(productos);
+        System.out.println("Ramiro Developer");
        
 
 
     }
+
 }
