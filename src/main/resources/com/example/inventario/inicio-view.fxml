@@ -17,6 +17,8 @@
         <Tab fx:id="tabVentas" text="Ventas">
           <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <!-- Aquí incluimos la vista de ventas -->
+            <fx:include source="venta-view.fxml" />
           </content>
         </Tab>
         <Tab text="Detalle Ventas">
