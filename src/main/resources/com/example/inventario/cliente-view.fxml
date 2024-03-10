@@ -17,10 +17,19 @@
         <Button fx:id="btnBuscar" layoutX="375.0" layoutY="146.0" mnemonicParsing="false" onAction="#buscarCliente" styleClass="success" stylesheets="@tema.css" text="Buscar" />
         <Button fx:id="btnLimpiar" layoutX="481.0" layoutY="146.0" mnemonicParsing="false" onAction="#limpiarCampo" styleClass="success" stylesheets="@tema.css" text="Limpiar" />
         <TableView fx:id="tableClientes" layoutX="108.0" layoutY="225.0" prefHeight="200.0" prefWidth="401.0">
+        <TextField fx:id="txtNumeroIdentificacion" layoutX="42.0" layoutY="71.0" promptText="Identificacion" />
+        <TextField fx:id="txtNombre" layoutX="216.0" layoutY="71.0" promptText="Nombre" />
+        <TextField fx:id="txtDireccion" layoutX="394.0" layoutY="71.0" promptText="Direccion" />
+        <Button fx:id="btnCrearCliente" layoutX="42.0" layoutY="143.0" mnemonicParsing="false" onAction="#crearCliente" styleClass="success" stylesheets="@tema.css" text="Crear" />
+        <Button fx:id="btnActualizarCliente" layoutX="129.0" layoutY="143.0" mnemonicParsing="false" onAction="#actualizarCliente" styleClass="success" stylesheets="@tema.css" text="Actualizar" />
+        <Button fx:id="btnEliminarCliente" layoutX="255.0" layoutY="143.0" mnemonicParsing="false" onAction="#eliminarCliente" styleClass="success" stylesheets="@tema.css" text="Eliminar" />
+        <Button fx:id="btnBuscar" layoutX="370.0" layoutY="143.0" mnemonicParsing="false" onAction="#buscarCliente" styleClass="success" stylesheets="@tema.css" text="Buscar" />
+        <Button fx:id="btnLimpiar" layoutX="472.0" layoutY="143.0" mnemonicParsing="false" onAction="#limpiarCampo" styleClass="success" stylesheets="@tema.css" text="Limpiar" />
+        <TableView fx:id="tableClientes" layoutX="37.0" layoutY="225.0" prefHeight="318.0" prefWidth="514.0">
             <columns>
                 <TableColumn fx:id="colIdentificacion" prefWidth="108.66665649414062" text="Identificacion" />
-                <TableColumn fx:id="colNombre" prefWidth="164.66668701171875" text="Nombre" />
-                <TableColumn fx:id="colDireccion" prefWidth="127.333251953125" text="Direccion" />
+                <TableColumn fx:id="colNombre" prefWidth="235.99993896484375" text="Nombre" />
+                <TableColumn fx:id="colDireccion" prefWidth="168.0" text="Direccion" />
             </columns>
         </TableView>
     </children>
