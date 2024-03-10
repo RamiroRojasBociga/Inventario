@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventario.controller.InicioController">
+  <children>
+    <TabPane fx:id="tabPrincipal" layoutX="14.0" layoutY="14.0" prefHeight="377.0" prefWidth="571.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab fx:id="tabClientes" text="Clientes">
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <!-- Aquí incluimos la vista del cliente -->
+            <fx:include source="cliente-view.fxml" />
+          </content>
+        </Tab>
+        <Tab fx:id="tabVentas" text="Ventas">
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab fx:id="tabInventario" text="Inventario">
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <!-- Aquí incluimos la vista del inventario -->
+            <fx:include source="inventario-view.fxml" />
+          </content>
+        </Tab>
+        <Tab fx:id="tabProductos" text="Productos">
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <!-- Aquí incluimos la vista de productos -->
+            <fx:include source="producto-view.fxml" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>
