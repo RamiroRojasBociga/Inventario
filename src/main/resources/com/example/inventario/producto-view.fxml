@@ -6,18 +6,33 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventario.controller.ProductoController">
+<AnchorPane prefHeight="356.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventario.controller.ProductoController">
    <children>
-      <Label fx:id="lblCodigo" layoutX="72.0" layoutY="37.0" text="Codigo" />
-      <Label fx:id="lblNombreProducto" layoutX="314.0" layoutY="37.0" text="Nombre Producto" />
-      <Label fx:id="lblPrecio" layoutX="76.0" layoutY="97.0" text="Precio" />
-      <Label fx:id="lblInventario" layoutX="356.0" layoutY="97.0" text="Inventario" />
-      <TextField fx:id="txtCodigo" layoutX="125.0" layoutY="33.0" />
-      <TextField fx:id="txtNombreProducto" layoutX="424.0" layoutY="33.0" />
-      <TextField fx:id="txtPrecio" layoutX="125.0" layoutY="93.0" />
-      <TextField fx:id="txtInventario" layoutX="424.0" layoutY="93.0" />
-      <TableView fx:id="tableProducto" layoutX="19.0" layoutY="186.0" prefHeight="200.0" prefWidth="563.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1e6eb" height="129.0" layoutX="4.0" layoutY="6.0" stroke="BLACK" strokeType="INSIDE" width="565.0" />
+      <Label fx:id="lblCodigo" layoutX="24.0" layoutY="22.0" text="Codigo">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="lblNombreProducto" layoutX="290.0" layoutY="22.0" text="Nombre Producto">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="lblPrecio" layoutX="28.0" layoutY="61.0" text="Precio">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="lblInventario" layoutX="343.0" layoutY="61.0" text="Inventario">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TextField fx:id="txtCodigo" layoutX="77.0" layoutY="18.0" />
+      <TextField fx:id="txtNombreProducto" layoutX="411.0" layoutY="18.0" />
+      <TextField fx:id="txtPrecio" layoutX="77.0" layoutY="57.0" />
+      <TextField fx:id="txtInventario" layoutX="411.0" layoutY="57.0" />
+      <TableView fx:id="tableProducto" layoutX="7.0" layoutY="140.0" prefHeight="165.0" prefWidth="565.0" stylesheets="@TableView.css">
         <columns>
           <TableColumn fx:id="colCodigo" prefWidth="155.33334350585938" text="Codigo" />
           <TableColumn fx:id="colNombre" prefWidth="239.33331298828125" text="Nombre" />
@@ -25,10 +40,11 @@
             <TableColumn fx:id="colInventario" prefWidth="73.33331298828125" text="Inventario" />
         </columns>
       </TableView>
-      <Button fx:id="btnCrear" layoutX="50.0" layoutY="139.0" mnemonicParsing="false" onAction="#crearProducto" text="Crear" />
-      <Button fx:id="btnActualizar" layoutX="160.0" layoutY="139.0" mnemonicParsing="false" onAction="#actualizarProducto" text="Actualizar" />
-      <Button fx:id="btnEliminar" layoutX="249.0" layoutY="139.0" mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar" />
-      <Button fx:id="btnBuscar" layoutX="347.0" layoutY="139.0" mnemonicParsing="false" onAction="#buscarProducto" text="Buscar" />
-      <Button fx:id="btnLimpiar" layoutX="473.0" layoutY="139.0" mnemonicParsing="false" onAction="#limpiarCampo" text="Limpiar" />
+      <Button fx:id="btnCrear" layoutX="28.0" layoutY="93.0" mnemonicParsing="false" onAction="#crearProducto" styleClass="success" stylesheets="@tema.css" text="Crear" />
+      <Button fx:id="btnActualizar" layoutX="169.0" layoutY="93.0" mnemonicParsing="false" onAction="#actualizarProducto" styleClass="success" stylesheets="@tema.css" text="Actualizar" />
+      <Button fx:id="btnEliminar" layoutX="454.0" layoutY="93.0" mnemonicParsing="false" onAction="#eliminarProducto" styleClass="warning" stylesheets="@tema.css" text="Eliminar" />
+      <Button fx:id="btnBuscar" layoutX="341.0" layoutY="316.0" mnemonicParsing="false" onAction="#buscarProducto" styleClass="success" stylesheets="@tema.css" text="Buscar" />
+      <Button fx:id="btnLimpiar" layoutX="313.0" layoutY="93.0" mnemonicParsing="false" onAction="#limpiarCampo" styleClass="success" stylesheets="@tema.css" text="Limpiar" />
+      <TextField fx:id="txtBuscar" layoutX="414.0" layoutY="319.0" promptText="Codigo" />
    </children>
 </AnchorPane>

@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventario.controller.ClienteController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventario.controller.ClienteController">
     <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dcdfe2" height="165.0" layoutX="35.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" width="514.0" />
-        <Label fx:id="lblNumeroIdentificacion" layoutX="45.0" layoutY="36.0" text="Numero Identificacion">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dcdfe2" height="122.0" layoutX="35.0" layoutY="8.0" stroke="BLACK" strokeType="INSIDE" width="514.0" />
+        <Label fx:id="lblNumeroIdentificacion" layoutX="45.0" layoutY="19.0" text="Numero Identificacion">
          <font>
             <Font size="14.0" />
          </font></Label>
-        <Label fx:id="lblNombre" layoutX="218.0" layoutY="35.0" text="Nombre">
+        <Label fx:id="lblNombre" layoutX="218.0" layoutY="18.0" text="Nombre">
          <font>
             <Font size="14.0" />
          </font></Label>
-        <Label fx:id="lblDireccion" layoutX="395.0" layoutY="35.0" text="Direccion">
+        <Label fx:id="lblDireccion" layoutX="395.0" layoutY="18.0" text="Direccion">
          <font>
             <Font size="14.0" />
          </font></Label>
-        <TextField fx:id="txtNumeroIdentificacion" layoutX="42.0" layoutY="71.0" promptText="Identificacion" />
-        <TextField fx:id="txtNombre" layoutX="216.0" layoutY="71.0" promptText="Nombre" />
-        <TextField fx:id="txtDireccion" layoutX="394.0" layoutY="71.0" promptText="Direccion" />
-        <Button fx:id="btnCrearCliente" layoutX="42.0" layoutY="143.0" mnemonicParsing="false" onAction="#crearCliente" styleClass="success" stylesheets="@tema.css" text="Crear" />
-        <Button fx:id="btnActualizarCliente" layoutX="129.0" layoutY="143.0" mnemonicParsing="false" onAction="#actualizarCliente" styleClass="success" stylesheets="@tema.css" text="Actualizar" />
-        <Button fx:id="btnEliminarCliente" layoutX="255.0" layoutY="143.0" mnemonicParsing="false" onAction="#eliminarCliente" styleClass="success" stylesheets="@tema.css" text="Eliminar" />
-        <Button fx:id="btnBuscar" layoutX="370.0" layoutY="143.0" mnemonicParsing="false" onAction="#buscarCliente" styleClass="success" stylesheets="@tema.css" text="Buscar" />
-        <Button fx:id="btnLimpiar" layoutX="472.0" layoutY="143.0" mnemonicParsing="false" onAction="#limpiarCampo" styleClass="success" stylesheets="@tema.css" text="Limpiar" />
-        <TableView fx:id="tableClientes" layoutX="37.0" layoutY="225.0" prefHeight="318.0" prefWidth="514.0">
+        <TextField fx:id="txtNumeroIdentificacion" layoutX="42.0" layoutY="44.0" promptText="Identificacion" />
+        <TextField fx:id="txtNombre" layoutX="216.0" layoutY="44.0" promptText="Nombre" />
+        <TextField fx:id="txtDireccion" layoutX="394.0" layoutY="44.0" promptText="Direccion" />
+        <Button fx:id="btnCrearCliente" layoutX="45.0" layoutY="84.0" mnemonicParsing="false" onAction="#crearCliente" styleClass="success" stylesheets="@tema.css" text="Crear" />
+        <Button fx:id="btnActualizarCliente" layoutX="176.0" layoutY="84.0" mnemonicParsing="false" onAction="#actualizarCliente" styleClass="success" stylesheets="@tema.css" text="Actualizar" />
+        <Button fx:id="btnEliminarCliente" layoutX="466.0" layoutY="84.0" mnemonicParsing="false" onAction="#eliminarCliente" styleClass="warning" stylesheets="@tema.css" text="Eliminar" />
+        <Button fx:id="btnBuscar" layoutX="324.0" layoutY="306.0" mnemonicParsing="false" onAction="#buscarCliente" styleClass="success" stylesheets="@tema.css" text="Buscar" />
+        <Button fx:id="btnLimpiar" layoutX="332.0" layoutY="84.0" mnemonicParsing="false" onAction="#limpiarCampo" styleClass="success" stylesheets="@tema.css" text="Limpiar" />
+        <TableView fx:id="tableClientes" layoutX="35.0" layoutY="145.0" prefHeight="151.0" prefWidth="514.0">
             <columns>
                 <TableColumn fx:id="colIdentificacion" prefWidth="108.66665649414062" text="Identificacion" />
                 <TableColumn fx:id="colNombre" prefWidth="235.99993896484375" text="Nombre" />
                 <TableColumn fx:id="colDireccion" prefWidth="168.0" text="Direccion" />
             </columns>
         </TableView>
+      <TextField fx:id="txtBuscar" layoutX="397.0" layoutY="309.0" promptText="Identificacion" />
     </children>
 </AnchorPane>
