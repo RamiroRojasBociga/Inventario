@@ -1,8 +1,8 @@
 package com.example.inventario.controller;
 
-import com.example.inventario.model.DetalleVenta;
-import com.example.inventario.model.Producto;
+import com.example.inventario.model.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,9 +17,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class VentaController implements Initializable {
+    private ObservableList<Cliente> listaClientes;
+
+    @FXML
+    private ComboBox<Cliente> comboCliente;
 
     private ObservableList<DetalleVenta> detallesVenta = FXCollections.observableArrayList();
-
     private ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
 
     @FXML
@@ -61,6 +64,30 @@ public class VentaController implements Initializable {
     @FXML
     private TextField txfSubtotal;
 
+    @FXML
+    private TextField txtFecha;
+
+    @FXML
+    private TextField txtCodigo;
+
+    @FXML
+    private TextField txtTotal;
+
+    @FXML
+    private TableView<Venta> tableVenta;
+
+    @FXML
+    private TableColumn<Venta, String> colFechaVenta;
+
+    @FXML
+    private TableColumn<Venta, String> colCodigoVenta;
+
+    @FXML
+    private TableColumn<Venta, Cliente> colCliente;
+
+    @FXML
+    private TableColumn<Venta, Double> colValorTotal;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cargarProductosDesdeArchivo("C:\\Users\\ramiro.rojas\\Documents\\" +
@@ -68,46 +95,67 @@ public class VentaController implements Initializable {
                 "\\inventario\\src\\main\\resources\\persistencia.archivos\\archivoProductos.txt");
         cmbProductos.setItems(listaProductos);
 
+        // Obtener la lista de clientes del mapa en la clase Tienda
+        listaClientes = FXCollections.observableArrayList(Tienda.mapaClientes.values());
+
+        // Cargar los clientes en el ComboBox
+        comboCliente.setItems(listaClientes);
+
         // Configurar las columnas de la TableView
         colProducto.setCellValueFactory(new PropertyValueFactory<>("producto"));
         colCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         colSubtotal.setCellValueFactory(new PropertyValueFactory<>("subtotal"));
 
+        // Configurar las columnas de la tabla de venta
+        colFechaVenta.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        colCodigoVenta.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+        colCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+        colValorTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+
         // Enlazar la lista observable con la TableView
         tableDetalle.setItems(detallesVenta);
+
         // Agregar un listener al campo de cantidad para calcular el subtotal automáticamente
         txfCantidad.textProperty().addListener((observable, oldValue, newValue) -> {
             calcularSubtotal();
         });
+
         tableDetalle.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 mostrarDetalleSeleccionado(newValue);
             }
         });
-    }
+        // Agregar un listener al campo de cantidad para calcular el subtotal automáticamente
+        txfCantidad.textProperty().addListener((observable, oldValue, newValue) -> {
+            calcularSubtotal();
+        });
 
-    private void cargarProductosDesdeArchivo(String rutaArchivo) {
-        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                // Ignorar las líneas vacías
-                if (linea.trim().isEmpty()) {
-                    continue;
-                }
-                // Separar la línea en partes utilizando una coma como delimitador
-                String[] partes = linea.split(",");
-                // Crear un objeto Producto con los datos de la línea y agregarlo a la lista
-                Producto producto = new Producto(partes[0], partes[1], Double.parseDouble(partes[2]), Integer.parseInt(partes[3]));
-                listaProductos.add(producto);
+        // Agregar un listener a la lista de detalles de venta para recalcular el valor total
+        detallesVenta.addListener((ListChangeListener.Change<? extends DetalleVenta> change) -> {
+            double total = 0.0;
+            for (DetalleVenta detalle : detallesVenta) {
+                total += detalle.getSubtotal();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            txtTotal.setText(String.valueOf(total));
+        });
+
+        tableDetalle.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                mostrarDetalleSeleccionado(newValue);
+            }
+        });
+
     }
 
     @FXML
     void aceptarVenta(ActionEvent event) {
-        // Implementación del método
+        // Obtener los valores de los campos de venta
+        String fechaVenta = txtFecha.getText();
+        String codigoVenta = txtCodigo.getText();
+        Cliente cliente = comboCliente.getValue();
+        double totalVenta = Double.parseDouble(txtTotal.getText());
+
+
     }
 
     @FXML
@@ -117,7 +165,19 @@ public class VentaController implements Initializable {
 
     @FXML
     void agregarDetalle(ActionEvent event) {
-        // Implementación del método
+        // Obtener los valores de los campos de detalle
+        Producto productoSeleccionado = cmbProductos.getValue();
+        int cantidad = Integer.parseInt(txfCantidad.getText());
+        double subtotal = Double.parseDouble(txfSubtotal.getText());
+
+        // Crear un objeto DetalleVenta con los valores obtenidos
+        DetalleVenta detalleVenta = new DetalleVenta(productoSeleccionado, cantidad, subtotal);
+
+        // Agregar el detalle a la tabla de detalle
+        tableDetalle.getItems().add(detalleVenta);
+
+        // Limpiar los campos de detalle
+        limpiarCamposDetalle();
     }
 
     @FXML
@@ -159,4 +219,39 @@ public class VentaController implements Initializable {
         txfCantidad.setText(String.valueOf(cantidad));
         txfSubtotal.setText(String.valueOf(subtotal));
     }
+
+    private void cargarProductosDesdeArchivo(String rutaArchivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                // Ignorar las líneas vacías
+                if (linea.trim().isEmpty()) {
+                    continue;
+                }
+                // Separar la línea en partes utilizando una coma como delimitador
+                String[] partes = linea.split(",");
+                // Crear un objeto Producto con los datos de la línea y agregarlo a la lista
+                Producto producto = new Producto(partes[0], partes[1], Double.parseDouble(partes[2]), Integer.parseInt(partes[3]));
+                listaProductos.add(producto);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void limpiarCamposVenta() {
+        txtFecha.clear();
+        txtCodigo.clear();
+        comboCliente.getSelectionModel().clearSelection();
+        txtTotal.clear();
+    }
+
+    private void limpiarCamposDetalle() {
+        cmbProductos.getSelectionModel().clearSelection();
+        txfCantidad.clear();
+        txfSubtotal.clear();
+    }
+
+    // Método estático para actualizar el ComboBox de clientes
+
 }
