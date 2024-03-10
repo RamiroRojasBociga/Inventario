@@ -50,6 +50,8 @@ public class ClienteController {
 
     @FXML
     private TableView<Cliente> tableClientes;
+    @FXML
+    private TextField txtBuscar;
 
     @FXML
     private TextField txtDireccion;
@@ -93,11 +95,14 @@ public class ClienteController {
 
     @FXML
     void buscarCliente(ActionEvent event) {
-        String numeroIdentificacionBuscado = txtNumeroIdentificacion.getText();
+        String numeroIdentificacionBuscado = txtBuscar.getText();
         Cliente clienteEncontrado = Tienda.mapaClientes.get(numeroIdentificacionBuscado);
         if (clienteEncontrado != null) {
             txtNombre.setText(clienteEncontrado.getNombre());
             txtDireccion.setText(clienteEncontrado.getDireccion());
+            txtNumeroIdentificacion.setText(clienteEncontrado.getNumeroIdentificacion());
+            mostrarMensaje("Cliente Encontrado","El cliente se encuentra registrado en la base de datos");
+
         } else {
             mostrarMensaje("Cliente No Encontrado", "El cliente no se encontró en la base de datos.");
             txtNombre.setText("Cliente no encontrado");

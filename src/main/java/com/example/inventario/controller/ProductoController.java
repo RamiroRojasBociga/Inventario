@@ -67,6 +67,8 @@ public class ProductoController implements Initializable {
     private TableView<Producto> tableProducto;
 
     @FXML
+    private TextField txtBuscar;
+    @FXML
     private TextField txtCodigo;
 
     @FXML
@@ -125,7 +127,7 @@ public class ProductoController implements Initializable {
 
     @FXML
     void buscarProducto(ActionEvent event) {
-        String codigoProductoBuscado = txtCodigo.getText();
+        String codigoProductoBuscado = txtBuscar.getText();
         Producto productoEncontrado = listaProductos.stream()
                 .filter(producto -> producto.getCodigoUnico().equals(codigoProductoBuscado))
                 .findFirst()
