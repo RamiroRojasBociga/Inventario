@@ -7,11 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
@@ -85,6 +81,13 @@ public class DetalleVentaController implements Initializable {
         txfCantidad.textProperty().addListener((observable, oldValue, newValue) -> {
             calcularSubtotal();
         });
+        tableDetalle.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                mostrarDetalleSeleccionado(newValue);
+            }
+        });
+
+
 
 
     }
@@ -161,12 +164,54 @@ public class DetalleVentaController implements Initializable {
 
     @FXML
     void editarDetalle(ActionEvent event) {
-        // Implementación del método
+        // Obtener el detalle de venta seleccionado en la tabla
+        DetalleVenta detalleSeleccionado = tableDetalle.getSelectionModel().getSelectedItem();
+
+        if (detalleSeleccionado != null) {
+            // Obtener los nuevos valores ingresados en los campos de texto y la selección del ComboBox
+            Producto nuevoProducto = cmbProductos.getValue();
+            int nuevaCantidad = Integer.parseInt(txfCantidad.getText());
+            double nuevoSubtotal = Double.parseDouble(txfSubtotal.getText());
+
+            // Verificar si los nuevos valores son válidos
+            if (nuevoProducto != null && nuevaCantidad > 0 && nuevoSubtotal > 0) {
+                // Actualizar los valores del detalle de venta seleccionado
+                detalleSeleccionado.setProducto(nuevoProducto);
+                detalleSeleccionado.setCantidad(nuevaCantidad);
+                detalleSeleccionado.setSubtotal(nuevoSubtotal);
+
+                // Actualizar la TableView para reflejar los cambios
+                tableDetalle.refresh();
+
+                // Limpiar los campos después de la edición
+                limpiarCampos();
+            } else {
+                // Mostrar un mensaje de error si los datos no son válidos
+                mostrarMensaje("Error", "Los datos ingresados no son válidos.");
+            }
+        } else {
+            // Mostrar un mensaje de error si no se seleccionó ningún detalle de venta
+            mostrarMensaje("Error", "No se ha seleccionado ningún detalle de venta para editar.");
+        }
     }
+
 
     @FXML
     void eliminarDetalle(ActionEvent event) {
-        // Implementación del método
+        // Obtener el detalle de venta seleccionado en la tabla
+        DetalleVenta detalleSeleccionado = tableDetalle.getSelectionModel().getSelectedItem();
+
+        // Verificar si se seleccionó un detalle de venta
+        if (detalleSeleccionado != null) {
+            // Eliminar el detalle de venta de la lista de detallesVenta
+            detallesVenta.remove(detalleSeleccionado);
+            // Limpiar la selección en la tabla
+            tableDetalle.getSelectionModel().clearSelection();
+            mostrarMensaje("Detalle Eliminado", "El detalle de venta ha sido eliminado correctamente.");
+        } else {
+            // Mostrar un mensaje de error si no se seleccionó ningún detalle de venta
+            mostrarMensaje("Error", "Por favor, seleccione un detalle de venta a eliminar.");
+        }
     }
     private void calcularSubtotal() {
         Producto productoSeleccionado = cmbProductos.getValue();
@@ -180,6 +225,23 @@ public class DetalleVentaController implements Initializable {
                 // Por ejemplo, mostrar un mensaje de error al usuario
             }
         }
+    }
+    private void mostrarMensaje(String titulo, String contenido) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(contenido);
+        alert.showAndWait();
+    }
+    private void mostrarDetalleSeleccionado(DetalleVenta detalleVenta) {
+        Producto producto = detalleVenta.getProducto();
+        int cantidad = detalleVenta.getCantidad();
+        double subtotal = detalleVenta.getSubtotal();
+
+        // Mostrar la información en los campos correspondientes
+        cmbProductos.setValue(producto);
+        txfCantidad.setText(String.valueOf(cantidad));
+        txfSubtotal.setText(String.valueOf(subtotal));
     }
 
 }
