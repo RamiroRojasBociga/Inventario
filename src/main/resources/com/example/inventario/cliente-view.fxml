@@ -2,21 +2,24 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventario.controller.ClienteController">
     <children>
-        <Label fx:id="lblNumeroIdentificacion" layoutX="42.0" layoutY="35.0" text="Numero Identificacion" />
-        <Label fx:id="lblNombre" layoutX="278.0" layoutY="35.0" text="Nombre" />
-        <Label fx:id="lblDireccion" layoutX="434.0" layoutY="35.0" text="Direccion" />
-        <TextField fx:id="txtNumeroIdentificacion" layoutX="26.0" layoutY="71.0" />
-        <TextField fx:id="txtNombre" layoutX="213.0" layoutY="71.0" />
-        <TextField fx:id="txtDireccion" layoutX="384.0" layoutY="71.0" />
-        <Button fx:id="btnCrearCliente" layoutX="63.0" layoutY="143.0" mnemonicParsing="false" onAction="#crearCliente" styleClass="success" stylesheets="@tema.css" text="Crear" />
-        <Button fx:id="btnActualizarCliente" layoutX="160.0" layoutY="146.0" mnemonicParsing="false" onAction="#actualizarCliente" styleClass="success" stylesheets="@tema.css" text="Actualizar" />
-        <Button fx:id="btnEliminarCliente" layoutX="279.0" layoutY="146.0" mnemonicParsing="false" onAction="#eliminarCliente" styleClass="success" stylesheets="@tema.css" text="Eliminar" />
-        <Button fx:id="btnBuscar" layoutX="375.0" layoutY="146.0" mnemonicParsing="false" onAction="#buscarCliente" styleClass="success" stylesheets="@tema.css" text="Buscar" />
-        <Button fx:id="btnLimpiar" layoutX="481.0" layoutY="146.0" mnemonicParsing="false" onAction="#limpiarCampo" styleClass="success" stylesheets="@tema.css" text="Limpiar" />
-        <TableView fx:id="tableClientes" layoutX="108.0" layoutY="225.0" prefHeight="200.0" prefWidth="401.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dcdfe2" height="165.0" layoutX="35.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" width="514.0" />
+        <Label fx:id="lblNumeroIdentificacion" layoutX="45.0" layoutY="36.0" text="Numero Identificacion">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+        <Label fx:id="lblNombre" layoutX="218.0" layoutY="35.0" text="Nombre">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+        <Label fx:id="lblDireccion" layoutX="395.0" layoutY="35.0" text="Direccion">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
         <TextField fx:id="txtNumeroIdentificacion" layoutX="42.0" layoutY="71.0" promptText="Identificacion" />
         <TextField fx:id="txtNombre" layoutX="216.0" layoutY="71.0" promptText="Nombre" />
         <TextField fx:id="txtDireccion" layoutX="394.0" layoutY="71.0" promptText="Direccion" />
