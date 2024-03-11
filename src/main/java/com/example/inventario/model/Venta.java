@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Venta {
     private String fecha;
+
+    private Cliente cliente;
     private String codigo;
     private Integer total;
     private String cantidad;
@@ -22,6 +24,19 @@ public class Venta {
         this.detallesVenta = detallesVenta;
     }
 
+    public Venta(String fecha,  String codigo, Cliente cliente, Integer total) {
+        this.fecha = fecha;
+        this.codigo = codigo;
+        this.cliente = cliente;
+        this.total = total;
+    }
+
+    public Venta(String fechaVenta, String codigoVenta, Cliente cliente, double totalVenta) {
+    }
+
+
+
+
     public String getFecha() {
         return fecha;
     }
@@ -32,6 +47,10 @@ public class Venta {
 
     public String getCodigo() {
         return codigo;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
     }
 
     public void setCodigo(String codigo) {

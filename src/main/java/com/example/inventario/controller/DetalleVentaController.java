@@ -2,6 +2,7 @@ package com.example.inventario.controller;
 
 import com.example.inventario.model.DetalleVenta;
 import com.example.inventario.model.Producto;
+import com.example.inventario.utils.Persistencia;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +19,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DetalleVentaController implements Initializable {
+
+    Persistencia persistencia = new Persistencia();
 
     private ObservableList<DetalleVenta> detallesVenta = FXCollections.observableArrayList();
 
@@ -63,12 +66,15 @@ public class DetalleVentaController implements Initializable {
     @FXML
     private TextField txfSubtotal;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cargarProductosDesdeArchivo("C:\\Users\\ramiro.rojas\\Documents\\" +
-                "Universidad\\Sexto Semestre\\Estructura de datos\\ProyectosJava" +
-                "\\inventario\\src\\main\\resources\\persistencia.archivos\\archivoProductos.txt");
+
+
+
+        cargarProductosDesdeArchivo("src\\main\\resources\\persistencia.archivos\\archivoProductos.txt");
         cmbProductos.setItems(listaProductos);
+
 
         // Configurar las columnas de la TableView
         colProducto.setCellValueFactory(new PropertyValueFactory<>("producto"));
