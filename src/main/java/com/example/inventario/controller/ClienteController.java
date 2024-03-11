@@ -3,6 +3,7 @@ package com.example.inventario.controller;
 import com.example.inventario.model.Cliente;
 import com.example.inventario.model.Main;
 import com.example.inventario.model.Tienda;
+import com.example.inventario.utils.Persistencia;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Alert;
 import javafx.collections.ObservableList;
@@ -69,6 +70,7 @@ public class ClienteController {
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
         tableClientes.setItems(listaClientes);
+        cargarClientesDesdeArchivo();
 
         tableClientes.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -120,13 +122,18 @@ public class ClienteController {
         if (numeroIdentificacion.isEmpty() || nombre.isEmpty() || direccion.isEmpty()) {
             mostrarMensaje("Campos Vacíos", "Por favor, complete todos los campos antes de crear un cliente.");
             return; // Salir del método si hay campos vacíos
+
         }
 
         Cliente nuevoCliente = new Cliente(numeroIdentificacion, nombre, direccion);
         Tienda.mapaClientes.put(numeroIdentificacion, nuevoCliente);
         listaClientes.add(nuevoCliente);
+        Persistencia.guardarClientesEnArchivo(listaClientes);
         mensajeClienteCreado();
         limpiarCampos();
+    }
+    private void cargarClientesDesdeArchivo() {
+        listaClientes.addAll(Persistencia.cargarClientesDesdeArchivo());
     }
 
     @FXML
