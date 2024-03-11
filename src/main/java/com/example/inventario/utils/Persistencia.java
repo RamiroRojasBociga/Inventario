@@ -11,11 +11,9 @@ import java.util.Map;
 
 public class Persistencia {
 
-    public static final String RUTA_ARCHIVO_PRODUCTOS = "C:\\Users\\ramiro.rojas\\Documents\\Universidad\\Sexto Semestre\\Estructura de datos\\ProyectosJava\\inventario\\src\\main\\resources\\persistencia.archivos\\archivoProductos.txt";
+    public static final String RUTA_ARCHIVO_PRODUCTOS = "src\\main\\resources\\persistencia.archivos\\archivoProductos.txt";
 
-    public static final String RUTA_ARCHIVO_CLIENTES = "C:\\Users\\ramiro.rojas" +
-            "\\Documents\\Universidad\\Sexto Semestre\\Estructura de datos\\" +
-            "ProyectosJava\\inventario\\src\\main\\resources\\persistencia.archivos" +
+    public static final String RUTA_ARCHIVO_CLIENTES = "src\\main\\resources\\persistencia.archivos" +
             "\\archivoClientes.txt";
 
     public static void guardarProductosEnArchivo(List<Producto> productos) {

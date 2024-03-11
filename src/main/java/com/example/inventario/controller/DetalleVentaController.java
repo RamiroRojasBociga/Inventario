@@ -72,9 +72,7 @@ public class DetalleVentaController implements Initializable {
 
 
 
-        cargarProductosDesdeArchivo("C:\\Users\\ramiro.rojas\\Documents\\" +
-                "Universidad\\Sexto Semestre\\Estructura de datos\\ProyectosJava" +
-                "\\inventario\\src\\main\\resources\\persistencia.archivos\\archivoProductos.txt");
+        cargarProductosDesdeArchivo("src\\main\\resources\\persistencia.archivos\\archivoProductos.txt");
         cmbProductos.setItems(listaProductos);
 
 

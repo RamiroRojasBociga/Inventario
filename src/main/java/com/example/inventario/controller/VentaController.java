@@ -102,15 +102,11 @@ public class VentaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        cargarClientesDesdeArchivo("C:\\Users\\ramiro.rojas\\Documents\\" +
-                "Universidad\\Sexto Semestre\\Estructura de datos\\ProyectosJava" +
-                "\\inventario\\src\\main\\resources\\persistencia.archivos\\archivoClientes.txt");
+        cargarClientesDesdeArchivo("src\\main\\resources\\persistencia.archivos\\archivoClientes.txt");
 
 
 
-        cargarProductosDesdeArchivo("C:\\Users\\ramiro.rojas\\Documents\\" +
-                "Universidad\\Sexto Semestre\\Estructura de datos\\ProyectosJava" +
-                "\\inventario\\src\\main\\resources\\persistencia.archivos\\archivoProductos.txt");
+        cargarProductosDesdeArchivo("src\\main\\resources\\persistencia.archivos\\archivoProductos.txt");
 
         // Obtener la lista de clientes del mapa en la clase Tienda
        // listaClientes = FXCollections.observableArrayList(Tienda.mapaClientes.values());
